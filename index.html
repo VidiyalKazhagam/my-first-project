@@ -1,10 +1,76 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>GST calculator</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tharun's Tools</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #2c3e50;
+    }
+    .container {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: 20px;
+    }
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+      color: #2980b9;
+    }
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      color: #555;
+    }
+    .tool-link {
+      display: block;
+      margin: 12px 0;
+      padding: 14px 24px;
+      background: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .tool-link:hover {
+      background: #2980b9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    }
+    footer {
+      margin-top: 30px;
+      color: #7f8c8d;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome!</h1>
-  <p><a href="gst-calculator.html">🧮 Try my GST Calculator</a></p>
+  <div class="container">
+    <h1>🛠️ Tharun's Finance Tools</h1>
+    <p>Simple, free tools for students, freelancers & small businesses in India.</p>
+    
+    <a href="gst-calculator.html" class="tool-link">🧮 GST Calculator</a>
+    <!-- Add more tools here later -->
+    
+    <footer>
+      Made with 💡 by Tharun 
+    </footer>
+  </div>
 </body>
 </html>
