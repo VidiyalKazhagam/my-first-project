@@ -1,40 +1,150 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>GST Calculator - By Tharun</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GST Calculator - India</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 40px; }
-    input, button { padding: 8px; margin: 5px; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #0d47a1;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+      max-width: 500px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #1565c0;
+    }
+    .input-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #bbdefb;
+      border-radius: 10px;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #2196f3;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0d47a1;
+    }
+    #result {
+      margin-top: 25px;
+      padding: 16px;
+      background: #e3f2fd;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.1rem;
+      display: none;
+    }
+    #result.show {
+      display: block;
+    }
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      color: #1976d2;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
-  <h1>GST Calculator (India)</h1>
-  <p>Enter amount (₹): <input type="number" id="amount" placeholder="e.g. 1000"></p>
-  <p>GST Rate (%): 
-    <select id="rate">
-      <option value="0">0%</option>
-      <option value="5">5%</option>
-      <option value="12">12%</option>
-      <option value="18" selected>18%</option>
-      <option value="28">28%</option>
-    </select>
-  </p>
-  <button onclick="calculate()">Calculate Total</button>
-  <p id="result"></p>
+  <div class="card">
+    <h1>🧮 GST Calculator (India)</h1>
+    
+    <div class="input-group">
+      <label for="amount">Amount (₹)</label>
+      <input type="number" id="amount" placeholder="Enter base amount" min="0" step="0.01">
+    </div>
+    
+    <div class="input-group">
+      <label for="rate">GST Rate</label>
+      <select id="rate">
+        <option value="0">0% (Exempt)</option>
+        <option value="5">5%</option>
+        <option value="12">12%</option>
+        <option value="18" selected>18% (Standard)</option>
+        <option value="28">28% (Luxury)</option>
+      </select>
+    </div>
+    
+    <button onclick="calculate()">Calculate Total</button>
+    
+    <div id="result"></div>
+    
+    <a href="index.html" class="back-link">← Back to Tools</a>
+  </div>
 
   <script>
     function calculate() {
-      const amount = parseFloat(document.getElementById('amount').value);
+      const amountInput = document.getElementById('amount').value;
       const rate = parseFloat(document.getElementById('rate').value);
-      if (isNaN(amount)) {
-        document.getElementById('result').innerText = 'Please enter a valid amount.';
+      const resultDiv = document.getElementById('result');
+
+      const amount = parseFloat(amountInput);
+
+      if (!amountInput || isNaN(amount) || amount < 0) {
+        resultDiv.innerHTML = '<span style="color: #d32f2f;">Please enter a valid amount ≥ 0.</span>';
+        resultDiv.classList.add('show');
         return;
       }
+
       const gst = amount * (rate / 100);
       const total = amount + gst;
-      document.getElementById('result').innerHTML = 
-        `GST (${rate}%): ₹${gst.toFixed(2)}<br>Total Amount: ₹${total.toFixed(2)}`;
+
+      resultDiv.innerHTML = `
+        <strong>Results:</strong><br>
+        Base Amount: ₹${amount.toFixed(2)}<br>
+        GST (${rate}%): ₹${gst.toFixed(2)}<br>
+        <strong>Total Payable: ₹${total.toFixed(2)}</strong>
+      `;
+      resultDiv.classList.add('show');
     }
+
+    // Allow Enter key to calculate
+    document.getElementById('amount').addEventListener('keyup', function(e) {
+      if (e.key === 'Enter') calculate();
+    });
   </script>
 </body>
 </html>
